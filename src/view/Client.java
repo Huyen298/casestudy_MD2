@@ -32,6 +32,7 @@ public class Client {
         books.add(b8);
         books.add(b9);
         books.add(b10);
+        Manager.bookList=books;
         int choice= -1;
         Scanner input= new Scanner(System.in);
         while (choice!=0){
@@ -40,7 +41,8 @@ public class Client {
             System.out.println("3. Thêm sách nước ngoài ");
             System.out.println("4.Tìm sách ");
             System.out.println("5. Sửa thông tin sách");
-            System.out.println("6. ");
+            System.out.println("6. Mua sách");
+            System.out.println("7. Sách đang được giảm giá");
             choice = input.nextInt();
             switch (choice){
                 case 1:
@@ -58,31 +60,15 @@ public class Client {
                     Manager.findBook(books);
                     break;
                 case 5:
-                    System.out.println("Nhập tên sách muốn sửa thông tin:");
+                    System.out.println("Nhập tên sách muốn sửa thông tin");
                     Scanner scanner = new Scanner(System.in);
                     String input_name = scanner.nextLine();
-
-//                case 1:
-//                    Manager.showListDomesticBook(books);
-//                    break;
-//                case 2:
-//                    Manager.showListForeignBook(books);
-//                    break;
-//                case 3:
-//                    books.add(Manager.addNewDomesticBook());
-//                    Manager.showListDomesticBook(books);
-//                    break;
-//                case 4:
-//                    books.add(Manager.addNewForeignBook());
-//                    Manager.showListForeignBook(books);
-//                    break;
-//                case 5:
-//                    Manager.findDomesticBook(books);
-//                    break;
-//                case 6:
-//                    Manager.findForeignBook(books);
-//                    break;
-
+                    int index = Manager.getBookByName(input_name);
+                    Manager.editBook(index, Manager.creatNewBook());
+                    Manager.showListBook(books);
+                    break;
+                case 6:
+                    System.out.println("Giá tiền của cuốn sách là: "+Manager.buyBook(books));
             }
         }
     }

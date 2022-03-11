@@ -27,4 +27,5 @@ public class DomesticBook extends Book {
     ", category: "+getCategory()+
     ", publishYear: "+getPublishYear()+"}";
     }
+
 }

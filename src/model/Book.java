@@ -1,12 +1,19 @@
 package model;
 
-public abstract class Book {
+import java.io.Serializable;
+
+public abstract class Book implements Comparable<Book>, Serializable {
     private String id;
     private String name;
     private String author;
     private int price;
     private String category;
     private int publishYear;
+
+    @Override
+    public int compareTo(Book o) {
+        return this.price - o.getPrice();
+    }
 
     public abstract double tax();
 

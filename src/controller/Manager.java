@@ -3,13 +3,16 @@ package controller;
 import model.Book;
 import model.DomesticBook;
 import model.ForeignBook;
+import storage.BookFile;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
 public class Manager {
-    public static List<Book> bookList = new ArrayList<>();
+    public static List<Book> bookList = BookFile.readFile();
 
     public static void showListBook(List<Book> books) {
         for (Book b : books
@@ -18,7 +21,7 @@ public class Manager {
         }
     }
 
-    public static DomesticBook addNewDomesticBook() {
+    public static DomesticBook creatNewDomesticBook() {
         System.out.println("Id: ");
         Scanner scanner = new Scanner(System.in);
         String id = scanner.nextLine();
@@ -44,9 +47,10 @@ public class Manager {
         int publishBook = scanner5.nextInt();
         DomesticBook book = new DomesticBook(id, name, author, price, category, publishBook);
         return book;
+
     }
 
-    public static ForeignBook addNewForeignBook() {
+    public static ForeignBook creatNewForeignBook() {
         System.out.println("Id: ");
         Scanner scanner = new Scanner(System.in);
         String id = scanner.nextLine();
@@ -72,6 +76,24 @@ public class Manager {
         int publishBook = scanner5.nextInt();
         ForeignBook book = new ForeignBook(id, name, author, price, category, publishBook);
         return book;
+    }
+    public static void addNewDomestic(List<Book> books){
+        Book book = creatNewDomesticBook();
+        books.add(book);
+        try {
+            BookFile.writerFile(bookList);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public static void addNewForeign(List<Book> books){
+        Book book = creatNewForeignBook();
+        books.add(book);
+        try {
+            BookFile.writerFile(bookList);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void findBook(List<Book> books) {
@@ -143,10 +165,38 @@ public class Manager {
             Book book = books.get(i);
             if (input_name.equals(book.getName())){
                 cost= book.getPrice()+book.tax();
+                books.remove(i);
             }
         }
         return cost;
     }
-
+    public static void discountBook(List<Book> books){
+        double price = 0;
+        System.out.println("Sách giảm 30%:");
+        for (int i = 0; i < bookList.size(); i++) {
+            Book book = bookList.get(i);
+            if (book.getCategory().equals("Văn học")){
+                price=book.getPrice()-book.getPrice()*0.3;
+                System.out.println(book);
+                System.out.println("Giá sách sau khi giảm: "+price);
+            }
+        }
+        System.out.println("Sách giảm 10%:");
+        for (int i = 0; i < bookList.size(); i++) {
+            Book book = bookList.get(i);
+                if (book.getCategory().equals("Kĩ năng")) {
+                    price = book.getPrice() - book.getPrice() * 0.1;
+                    System.out.println(book);
+                    System.out.println("Giá sách sau khi giảm: " + price);
+            }
+        }
+    }
+    public static void sortList(List<Book> books){
+        Collections.sort(books);
+        for (Book b:books
+             ) {
+            System.out.println(b);
+        }
+    }
 }
 

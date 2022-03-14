@@ -11,7 +11,7 @@ public class ForeignBook extends Book {
     }
 
     public ForeignBook(String id, String name, String author, int price, String category, int publishYear) {
-        super(id, name, author, price, category, publishYear);
+        super(id, name, author, price, category,  publishYear);
     }
 
     @Override

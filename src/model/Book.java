@@ -20,7 +20,7 @@ public abstract class Book implements Comparable<Book>, Serializable {
     public Book() {
     }
 
-    public Book(String id, String name, String author, int price, String category,int publishYear) {
+    public Book(String id, String name, String author, int price, String category, int publishYear) {
         this.id = id;
         this.name = name;
         this.author = author;
@@ -72,6 +72,8 @@ public abstract class Book implements Comparable<Book>, Serializable {
     public String getCategory() {
         return category;
     }
+
+
 
     public void setCategory(String category) {
         this.category = category;

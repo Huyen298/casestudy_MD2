@@ -42,9 +42,13 @@ public class Manager {
         Scanner scanner4 = new Scanner(System.in);
         String category = scanner4.nextLine();
 
-        System.out.println("Năm xuất bản: ");
+        System.out.println("Số lượng: ");
         Scanner scanner5 = new Scanner(System.in);
-        int publishBook = scanner5.nextInt();
+        int amount = scanner5.nextInt();
+
+        System.out.println("Năm xuất bản: ");
+        Scanner scanner6 = new Scanner(System.in);
+        int publishBook = scanner6.nextInt();
         DomesticBook book = new DomesticBook(id, name, author, price, category, publishBook);
         return book;
 
@@ -74,7 +78,7 @@ public class Manager {
         System.out.println("Năm xuất bản: ");
         Scanner scanner5 = new Scanner(System.in);
         int publishBook = scanner5.nextInt();
-        ForeignBook book = new ForeignBook(id, name, author, price, category, publishBook);
+        ForeignBook book = new ForeignBook(id, name, author, price, category,publishBook);
         return book;
     }
     public static void addNewDomestic(List<Book> books){
@@ -128,6 +132,7 @@ public class Manager {
         bookList.set(index, newBook);
     }
 
+
     public static Book creatNewBook() {
         System.out.println("Id: ");
         Scanner scanner = new Scanner(System.in);
@@ -151,26 +156,36 @@ public class Manager {
 
         System.out.println("Năm xuất bản: ");
         Scanner scanner5 = new Scanner(System.in);
-        int publishBook = scanner5.nextInt();
+        int amount = scanner5.nextInt();
+
+        System.out.println("Năm xuất bản: ");
+        Scanner scanner6 = new Scanner(System.in);
+        int publishBook = scanner6.nextInt();
         Book newBook = new DomesticBook(id, name, author, price, category, publishBook);
         return newBook;
     }
 
-    public static double buyBook(List<Book> books) {
+    public static double buyBook(List<Book> bookList) {
         System.out.println("Mời nhập tên cuốn sách muốn mua:");
         Scanner scanner = new Scanner(System.in);
         String input_name = scanner.nextLine();
         double cost = 0;
-        for (int i = 0; i < books.size(); i++) {
-            Book book = books.get(i);
+        boolean check = false;
+        for (int i = 0; i < bookList.size(); i++) {
+            Book book = bookList.get(i);
             if (input_name.equals(book.getName())){
                 cost= book.getPrice()+book.tax();
-                books.remove(i);
+                check=true;
+                break;
+//                bookList.remove(i);
             }
+        }
+        if (!check){
+            System.out.println("Sách hiện chưa có");
         }
         return cost;
     }
-    public static void discountBook(List<Book> books){
+    public static void discountBook(List<Book> bookList){
         double price = 0;
         System.out.println("Sách giảm 30%:");
         for (int i = 0; i < bookList.size(); i++) {
@@ -198,5 +213,36 @@ public class Manager {
             System.out.println(b);
         }
     }
+    public static  void guestOfInformation(){
+        System.out.println("Nhập họ tên");
+        Scanner scanner = new Scanner(System.in);
+        String name = scanner.nextLine();
+        System.out.println("Nhập địa chỉ");
+        String address = scanner.nextLine();
+        System.out.println("Nhập số điện thoại");
+        String phone = scanner.nextLine();
+
+    }
+//    public static void deleteBook(String bookName){
+//        bookList.remove(bookName);
+//        System.out.println("Nhập tên sách");
+//        Scanner scanner = new Scanner(System.in);
+//        String ip = scanner.nextLine();
+//        for (int i = 0; i < bookList.size(); i++) {
+//            Book book = bookList.get(i);
+//            if (ip.equals(book.getName())){
+//                bookList.remove(i);
+//            }
+//        }
+//        for (Book b:bookList
+//             ) {
+//            System.out.println(b);
+//        }
+//        try {
+//            BookFile.writerFile(bookList);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
 }
 

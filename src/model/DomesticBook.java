@@ -14,7 +14,7 @@ public class DomesticBook extends Book {
     public DomesticBook() {
     }
 
-    public DomesticBook(String id, String name, String author, int price, String category, int publishYear) {
+    public DomesticBook(String id, String name, String author, int price, String category,int publishYear) {
         super(id, name, author, price, category, publishYear);
     }
 
